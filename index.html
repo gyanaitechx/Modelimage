@@ -403,7 +403,7 @@
             const expression = pick(EXPRESSIONS);
             const framing = pick(FRAMING);
 
-            const bookInstruction = `The book is genuinely open with visible pages, spine, and natural page curvature — the person is actively reading or mid-page-turn, not posing with the cover facing the camera. The book's physical size, spine color, and page-edge color should stay consistent with Reference Image 2, but the front cover itself does not need to be visible since the book is open.`;
+            const bookInstruction = `The book is genuinely open with visible pages, spine, and natural page curvature — the person is actively reading or mid-page-turn, not stiffly posing with the flat cover facing the camera. However, the book must be tilted/angled toward the camera enough that a clear, recognizable portion of the front cover artwork from Reference Image 2 — its exact colors, title text, and design — stays visible in the shot, either on the visible half of the open cover, the back cover, or the outer edge. Do NOT replace the cover with a plain, blank, or generic-colored cover — the exact printed design from Reference Image 2 must be legible and identifiable, just shown at a natural reading angle instead of flat-on.`;
 
             return `You are generating a realistic, high-end bookstagram-style photograph using two reference images. The final image should look like an authentic candid photo taken by a professional photographer — not AI-generated, not stiff or posed, no visible artifacts, no extra or malformed fingers, no distorted book pages.
 
@@ -419,7 +419,7 @@ STYLE: ${styleLook}. Photorealistic, natural skin texture, realistic hands with 
 
 ${customPrompt ? 'ADDITIONAL INSTRUCTIONS: ' + customPrompt : ''}
 
-STRICT RULES: Keep the person's face identical to Reference Image 1 — identity, skin tone, and hair must not change. The book must always be shown open/being read, never with the flat cover facing the camera. The background, pose, expression, framing, photographic style, AND the outfit must all be different/new in every generation — never repeat the same combination twice, and never keep the outfit from Reference Image 1.`;
+STRICT RULES: Keep the person's face identical to Reference Image 1 — identity, skin tone, and hair must not change. The book must always be shown genuinely open/being read (never posed flat-cover-to-camera), AND its exact cover design/colors/title from Reference Image 2 must still be clearly visible and recognizable somewhere in the shot — never a blank, plain, or invented cover. The background, pose, expression, framing, photographic style, AND the outfit must all be different/new in every generation — never repeat the same combination twice, and never keep the outfit from Reference Image 1.`;
         }
 
         async function doGenerate() {
