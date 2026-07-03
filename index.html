@@ -418,40 +418,42 @@
             const pose = pick(POSES);
             const styleLook = pick(STYLES);
             
-            return `You are creating a beautiful, photorealistic bookstagram-style photograph using two reference images. The goal is to make it look like a real professional photo taken by a bookstagrammer — natural, fresh, and never repetitive.
+            return `You are creating a stunning, ultra-realistic professional bookstagram photograph using two reference images. The result must look like it was shot by a top-tier photographer for a popular bookstagrammer — sharp, beautiful, polished and highly attractive.
 
-**REFERENCE IMAGE 1 (The Person - MUST KEEP IDENTICAL):**
-- Use this exact woman's face, identity, skin tone, eye color, hair color, hair length, and hairstyle with 100% accuracy.
-- Do NOT change her face, facial features, skin texture, or hair in any way. Her identity must stay completely recognizable.
+**REFERENCE IMAGE 1 (The Person - MUST KEEP 100% IDENTICAL):**
+- Use this exact woman's face, identity, skin tone, eye color, hair color, hair length and hairstyle with perfect accuracy.
+- Keep her face completely unchanged — same eyes, nose, lips, jawline, and expression.
+- Do NOT alter her facial features in any way.
 
-**REFERENCE IMAGE 2 (The Book Cover - MUST KEEP IDENTICAL):**
+**REFERENCE IMAGE 2 (The Book Cover - MUST KEEP 100% IDENTICAL):**
 - The physical book she is holding must show the EXACT same front cover design as Reference Image 2.
-- Do not change, redraw, move, or alter any text, title, author name, artwork, colors, or layout on the book cover. It must be pixel-perfect to the reference.
+- Do not change, redraw, move or alter any text, title, author name, artwork, colors or layout on the book cover.
 
-**WHAT MUST CHANGE EVERY SINGLE TIME (this is very important):**
-- The woman's outfit and clothing must be COMPLETELY DIFFERENT from the reference photo and from previous generations.
-- Choose a stylish, photogenic, bookstagram-appropriate outfit that perfectly matches the scene vibe (cozy sweaters, flowy blouses, casual chic dresses, oversized cardigans, elegant tops, etc.).
-- The pose must feel natural and different every time.
-- The background, environment, and lighting must be fresh and unique.
-- The overall composition and camera angle should feel new.
+**WHAT MUST CHANGE EVERY SINGLE TIME:**
+- The woman's outfit and clothing must be COMPLETELY DIFFERENT and stylish (choose elegant, cozy, or chic outfits that look expensive and photogenic).
+- Pose must be natural and fresh every time.
+- Background, environment and lighting must feel brand new.
+- Overall composition and camera angle should be different.
 
 **SCENE & POSE:**
 Place her in this location: ${sceneHint}.
 She is in this exact natural pose: ${pose}.
-She is holding or interacting with a real physical book. The front cover of this book must be exactly the design from Reference Image 2, with realistic book thickness, pages, shadows, and lighting that matches the scene.
+She is holding or interacting with a real physical book whose front cover is exactly the design from Reference Image 2, with realistic thickness, pages and shadows.
 
-**PHOTOGRAPHY STYLE & QUALITY:**
+**PHOTOGRAPHY QUALITY (VERY IMPORTANT):**
 ${styleLook}.
-Shot on a professional camera, highly photorealistic, natural skin texture with visible pores, realistic fabric texture and folds on clothing, natural hand positions, soft beautiful lighting, shallow depth of field, no plastic or artificial skin look. Make it look like a real high-quality Instagram bookstagram photo.
+Ultra sharp focus on the face and eyes, highly detailed skin with natural texture, beautiful soft natural makeup, flawless yet realistic skin, bright attractive eyes, professional beauty photography look.
+Shot on high-end camera (Sony A7R V / Canon R5), 85mm lens, f/1.4, cinematic lighting, shallow depth of field, crisp details, no noise, no dots, no artifacts, clean professional image.
+Make her look attractive, pretty, elegant, confident and photogenic — the kind of woman authors and bookstagrammers would love to see promoting their books.
 
 ${customPrompt ? 'ADDITIONAL USER INSTRUCTIONS: ' + customPrompt : ''}
 
 **STRICT RULES YOU MUST FOLLOW:**
-1. Face, hair, and identity from Reference Image 1 = 100% unchanged.
-2. Book cover from Reference Image 2 = 100% unchanged (no text or design modifications allowed).
-3. Outfit and clothing = MUST be new and different every single generation.
-4. The final image must look like a real photograph, not AI-generated. Avoid weird hands, distorted proportions, or overly smooth skin.
-5. Every generation should feel fresh, unique, and natural — as if she took a completely new photoshoot in a different outfit and location.`;
+1. Face and identity from Reference Image 1 = 100% unchanged.
+2. Book cover from Reference Image 2 = 100% unchanged.
+3. Outfit = MUST be new and different every generation.
+4. Image must be sharp, clean, high quality with zero noise or artifacts.
+5. The woman must look beautiful, polished and attractive in every generation.`;
         }
         async function doGenerate() {
             if (!file1Data || !file2Data || !apiKey) return;
