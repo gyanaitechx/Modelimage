@@ -298,7 +298,9 @@
         let history = [];
 
         const PLACES = ["a cozy sunlit cafe corner", "a minimalist modern bedroom with linen sheets", "an outdoor park bench under autumn trees", "a home library with tall wooden bookshelves", "a rainy cafe window seat", "a rooftop at golden hour", "a quiet reading nook with a floor lamp", "a garden bench surrounded by plants", "a train window seat with soft daylight", "a beach at sunset"];
-        const POSES = ["sitting cross-legged, holding the book open", "lying on the stomach on a bed, book propped up, legs crossed in the air", "leaning against a wall, book held at chest height", "sitting on a bench, book resting on lap", "standing by a window, book held up near the face, looking down at it", "curled up in an armchair with the book", "walking outdoors, book held against chest", "sitting at a table with a coffee cup, reading the book"];
+        const POSES_OPEN = ["sitting cross-legged, book open on lap, genuinely reading the pages", "lying on the stomach on a bed, book open and propped up, legs crossed in the air, reading", "curled up in an armchair, book open, deeply engrossed in reading", "sitting at a table with a coffee cup, book open flat on the table, reading", "sitting on a windowsill, book open in hands, eyes on the page", "lying back on a couch, book held open above, reading casually", "sitting on the floor against a bed frame, book open, one hand turning a page", "walking slowly outdoors, book open in both hands, eyes down reading", "sitting on porch steps, book open on knees, gentle smile while reading", "leaning on a window frame, book open, soft mid-page-turn moment", "sitting in a hammock, book open, relaxed and immersed", "sitting at a picnic blanket outdoors, book open, light breeze in hair"];
+        const EXPRESSIONS = ["soft content smile, relaxed eyes", "quiet, focused expression, fully absorbed in the story", "gentle smirk like she just read something interesting", "calm and peaceful expression, slightly downward gaze", "warm genuine smile, looking up briefly as if caught reading"];
+        const FRAMING = ["close-up shot focusing on face and book, shallow depth of field", "medium shot showing upper body and full book", "three-quarter angle shot with environment softly visible in background", "slightly overhead angle looking down at the book and person"];
         const STYLES = ["warm golden hour lighting, shallow depth of field, aesthetic film photography look", "soft natural window light, minimal muted tones, clean composition", "moody cinematic lighting, slightly desaturated colors", "bright airy pastel tones, cottagecore aesthetic", "high-contrast editorial photography style"];
         const OUTFITS = ["a chunky cream knit sweater with light blue denim jeans", "a soft oversized beige cardigan over a white t-shirt", "a fitted olive green blazer over a plain tee", "a cozy flannel shirt in muted plaid tones with rolled-up sleeves", "a simple black turtleneck with a long camel-colored coat", "a floral wrap dress in soft pastel tones", "a relaxed linen shirt in off-white, sleeves rolled up", "a mustard-yellow cardigan over a striped top", "a tailored trench coat over a light sweater", "a casual denim jacket over a plain white top", "a soft grey hoodie with a beanie", "a burgundy turtleneck sweater with tailored trousers"];
 
@@ -395,25 +397,29 @@
             const customPrompt = document.getElementById('prompt').value.trim();
             const activeChip = document.querySelector('#style-chips .chip.active');
             const sceneHint = activeChip ? activeChip.dataset.style : pick(PLACES);
-            const pose = pick(POSES);
+            const pose = pick(POSES_OPEN);
             const styleLook = pick(STYLES);
             const outfit = pick(OUTFITS);
+            const expression = pick(EXPRESSIONS);
+            const framing = pick(FRAMING);
 
-            return `You are generating a realistic bookstagram-style photograph using two reference images.
+            const bookInstruction = `The book is genuinely open with visible pages, spine, and natural page curvature — the person is actively reading or mid-page-turn, not posing with the cover facing the camera. The book's physical size, spine color, and page-edge color should stay consistent with Reference Image 2, but the front cover itself does not need to be visible since the book is open.`;
+
+            return `You are generating a realistic, high-end bookstagram-style photograph using two reference images. The final image should look like an authentic candid photo taken by a professional photographer — not AI-generated, not stiff or posed, no visible artifacts, no extra or malformed fingers, no distorted book pages.
 
 REFERENCE IMAGE 1 (Person): Use this exact person's face, identity, skin tone, and hair — do not alter their face or facial features in any way. DO NOT copy the clothing/outfit from this reference image — the outfit must be replaced entirely as instructed below.
 
-REFERENCE IMAGE 2 (Book Cover): Use this exact book cover design, exactly as shown — do not change any text, artwork, colors, or layout on the cover. Do not invent a new cover.
+REFERENCE IMAGE 2 (Book Cover): Use this exact book cover design for the spine/page-edge color reference only, exactly as shown — do not change the book's identity. Do not invent a different book.
 
-SCENE: Place the person from Reference Image 1 in ${sceneHint}, in this pose: ${pose}. The person is holding or near a physical book whose front cover shows exactly the design from Reference Image 2, wrapped realistically around a book with natural thickness, lighting and shadow consistent with the scene.
+SCENE: Place the person from Reference Image 1 in ${sceneHint}, in this pose: ${pose}. Facial expression: ${expression}. Framing: ${framing}. ${bookInstruction}
 
 OUTFIT (mandatory change): Dress the person in ${outfit}. This is a brand new outfit, different from whatever they are wearing in Reference Image 1 — replace the clothing completely, fitted naturally to their body with realistic fabric folds, texture and lighting consistent with the scene. Do not reuse or default back to the clothing shown in Reference Image 1.
 
-STYLE: ${styleLook}. Photorealistic, natural proportions, realistic hands holding the book, consistent lighting across the whole image.
+STYLE: ${styleLook}. Photorealistic, natural skin texture, realistic hands with correct finger count actually gripping the open pages, natural page bend and shadow between the pages, consistent lighting and color grading across the whole image, shot-on-camera quality (not illustration, not painting, not CGI).
 
 ${customPrompt ? 'ADDITIONAL INSTRUCTIONS: ' + customPrompt : ''}
 
-STRICT RULES: Keep the person's face identical to Reference Image 1 — identity, skin tone, and hair must not change. Keep the book cover design identical to Reference Image 2 with zero text or artwork changes. The background, pose, photographic style, AND the outfit must all be different/new in every generation — never repeat the same combination twice, and never keep the outfit from Reference Image 1.`;
+STRICT RULES: Keep the person's face identical to Reference Image 1 — identity, skin tone, and hair must not change. The book must always be shown open/being read, never with the flat cover facing the camera. The background, pose, expression, framing, photographic style, AND the outfit must all be different/new in every generation — never repeat the same combination twice, and never keep the outfit from Reference Image 1.`;
         }
 
         async function doGenerate() {
