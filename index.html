@@ -31,7 +31,6 @@
     </style>
 </head>
 <body class="bg-[#080810] text-zinc-200 min-h-screen">
-
     <!-- Loading Overlay -->
     <div id="loading-overlay" class="fixed inset-0 z-50 flex-col items-center justify-center bg-black/80 backdrop-blur-sm">
         <div class="glass rounded-3xl p-10 text-center max-w-sm mx-4">
@@ -50,7 +49,6 @@
             <div class="text-xs text-zinc-500 mt-3">~30-90 seconds estimated</div>
         </div>
     </div>
-
     <!-- Navbar -->
     <nav class="border-b border-white/5 bg-black/40 sticky top-0 z-40 backdrop-blur-xl">
         <div class="max-w-6xl mx-auto px-5 py-3.5 flex justify-between items-center">
@@ -73,7 +71,6 @@
             </div>
         </div>
     </nav>
-
     <!-- API Key Settings Panel -->
     <div id="settings-panel" class="hidden border-b border-yellow-500/20 bg-yellow-500/5">
         <div class="max-w-6xl mx-auto px-5 py-5">
@@ -97,7 +94,6 @@
             </div>
         </div>
     </div>
-
     <!-- Hero -->
     <div class="max-w-6xl mx-auto px-5 py-12 text-center">
         <div class="pill bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-5 mx-auto" style="width:fit-content">
@@ -109,12 +105,10 @@
         <p class="text-lg text-zinc-400 max-w-xl mx-auto mb-2">
             Upload your photo + a book cover → get a fresh photoshoot every time
         </p>
-        <p class="text-sm text-zinc-600">Your face &amp; the book cover stay identical • Pose, place &amp; style change</p>
+        <p class="text-sm text-zinc-600">Your face &amp; the book cover stay identical • Pose, outfit, place &amp; style change</p>
     </div>
-
     <!-- Main Card -->
     <div class="max-w-5xl mx-auto px-5 pb-16">
-
         <div id="no-key-warning" class="mb-6 glass rounded-2xl p-4 border border-yellow-500/25 flex items-center gap-3">
             <i class="fa-solid fa-triangle-exclamation text-yellow-400 text-xl flex-shrink-0"></i>
             <div class="flex-1">
@@ -125,10 +119,8 @@
                 Add Key
             </button>
         </div>
-
         <div class="glass rounded-3xl p-7 glow-blue">
             <div class="grid md:grid-cols-2 gap-7">
-
                 <!-- Model Photo -->
                 <div>
                     <div class="flex items-center gap-3 mb-3">
@@ -156,7 +148,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Cover Image -->
                 <div>
                     <div class="flex items-center gap-3 mb-3">
@@ -185,7 +176,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Style chips -->
             <div class="mt-6">
                 <label class="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-2 flex items-center gap-2">
@@ -200,7 +190,6 @@
                     <span class="chip pill bg-zinc-800/60 border border-zinc-700 text-zinc-300" data-style="beach at sunset, holding the book, soft warm tones">Beach Sunset</span>
                 </div>
             </div>
-
             <!-- Prompt -->
             <div class="mt-6">
                 <label class="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-2 flex items-center gap-2">
@@ -208,9 +197,8 @@
                 </label>
                 <textarea id="prompt" rows="2"
                           class="key-field w-full px-4 py-3 rounded-xl text-sm text-zinc-300 placeholder-zinc-600 resize-none font-mono"
-                          placeholder="e.g. sitting cross-legged on a rug, soft smile, natural pose"></textarea>
+                          placeholder="e.g. soft smile, natural pose, wearing a cozy oversized sweater"></textarea>
             </div>
-
             <!-- Generate Button -->
             <div class="mt-7 flex flex-col items-center gap-3">
                 <button onclick="doGenerate()" id="gen-btn" disabled
@@ -218,10 +206,9 @@
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                     <span id="btn-text">GENERATE PHOTO</span>
                 </button>
-                <p class="text-xs text-zinc-600">xAI Grok Imagine API • ~30-90 sec per generation</p>
+                <p class="text-xs text-zinc-600">xAI Grok Imagine API • ~30-90 sec per generation • Outfit changes every time</p>
             </div>
         </div>
-
         <!-- Result -->
         <div id="result-section" class="hidden mt-8 glass rounded-3xl p-7 glow-violet">
             <div class="flex justify-between items-center mb-6 flex-wrap gap-3">
@@ -231,7 +218,7 @@
                     </div>
                     <div>
                         <div class="font-bold text-xl">Generated!</div>
-                        <div class="text-xs text-zinc-500">Same face, same cover, new scene</div>
+                        <div class="text-xs text-zinc-500">Same face + same book cover • New outfit, pose &amp; scene every time</div>
                     </div>
                 </div>
                 <div class="flex gap-2">
@@ -239,21 +226,18 @@
                         <i class="fa-solid fa-download text-blue-400"></i> Download
                     </button>
                     <button onclick="doGenerate()" class="px-4 py-2 border border-zinc-700 hover:bg-zinc-800 rounded-xl text-sm flex items-center gap-2 transition-colors">
-                        <i class="fa-solid fa-rotate-right text-blue-400"></i> Regenerate (New Pose)
+                        <i class="fa-solid fa-rotate-right text-blue-400"></i> Regenerate (New Everything)
                     </button>
                 </div>
             </div>
-
             <div class="bg-zinc-900 rounded-2xl p-3 border border-emerald-700/40">
                 <img id="result-after" class="w-full rounded-xl result-shadow" alt="Result">
             </div>
-
             <div id="history-wrap" class="mt-5 hidden">
                 <div class="text-xs text-zinc-500 uppercase tracking-widest mb-2 font-semibold">Previous Generations</div>
                 <div class="grid grid-cols-4 sm:grid-cols-6 gap-2 thumb-grid" id="history-grid"></div>
             </div>
         </div>
-
         <!-- Error Box -->
         <div id="error-box" class="hidden mt-8 glass rounded-2xl p-5 border border-red-500/30">
             <div class="flex items-start gap-3">
@@ -265,7 +249,6 @@
                 </div>
             </div>
         </div>
-
         <!-- How it works -->
         <div class="mt-12 grid md:grid-cols-3 gap-5">
             <div class="glass rounded-2xl p-5 text-center">
@@ -279,36 +262,62 @@
                 <div class="w-12 h-12 bg-violet-500/15 rounded-2xl flex items-center justify-center mx-auto mb-3">
                     <i class="fa-solid fa-robot text-violet-400 text-lg"></i>
                 </div>
-                <div class="font-semibold mb-1">Grok AI Process</div>
-                <div class="text-xs text-zinc-500">Keeps face + cover identical, varies the rest</div>
+                <div class="font-semibold mb-1">Grok AI Creates Magic</div>
+                <div class="text-xs text-zinc-500">Keeps face + cover 100% same • Changes outfit, pose, background &amp; lighting</div>
             </div>
             <div class="glass rounded-2xl p-5 text-center">
                 <div class="w-12 h-12 bg-emerald-500/15 rounded-2xl flex items-center justify-center mx-auto mb-3">
                     <i class="fa-solid fa-download text-emerald-400 text-lg"></i>
                 </div>
-                <div class="font-semibold mb-1">Regenerate</div>
-                <div class="text-xs text-zinc-500">Hit regenerate for a new pose/place every time</div>
+                <div class="font-semibold mb-1">Regenerate = New Everything</div>
+                <div class="text-xs text-zinc-500">Hit regenerate for completely fresh outfit + scene every single time</div>
             </div>
         </div>
     </div>
-
     <script>
         let file1Data = null, file2Data = null;
         let apiKey = '';
         let history = [];
-
-        const PLACES = ["a cozy sunlit cafe corner", "a minimalist modern bedroom with linen sheets", "an outdoor park bench under autumn trees", "a home library with tall wooden bookshelves", "a rainy cafe window seat", "a rooftop at golden hour", "a quiet reading nook with a floor lamp", "a garden bench surrounded by plants", "a train window seat with soft daylight", "a beach at sunset"];
-        const POSES = ["sitting cross-legged, holding the book open", "lying on the stomach on a bed, book propped up, legs crossed in the air", "leaning against a wall, book held at chest height", "sitting on a bench, book resting on lap", "standing by a window, book held up near the face, looking down at it", "curled up in an armchair with the book", "walking outdoors, book held against chest", "sitting at a table with a coffee cup, reading the book"];
-        const STYLES = ["warm golden hour lighting, shallow depth of field, aesthetic film photography look", "soft natural window light, minimal muted tones, clean composition", "moody cinematic lighting, slightly desaturated colors", "bright airy pastel tones, cottagecore aesthetic", "high-contrast editorial photography style"];
-
+        const PLACES = [
+            "a cozy sunlit cafe corner with warm wooden tables",
+            "a minimalist modern bedroom with soft linen sheets and morning light",
+            "an outdoor park bench surrounded by golden autumn trees",
+            "a beautiful home library with tall wooden bookshelves and warm lamps",
+            "a rainy window seat in a cozy cafe with moody cinematic lighting",
+            "a rooftop at golden hour with soft city lights in background",
+            "a quiet reading nook with a floor lamp and plants",
+            "a garden bench surrounded by flowers and soft sunlight",
+            "a train window seat with soft daylight and countryside view",
+            "a beach at sunset with warm golden light and ocean waves",
+            "a stylish modern living room with large windows",
+            "a vintage bookstore aisle with soft overhead lighting"
+        ];
+        const POSES = [
+            "sitting cross-legged on the floor, gently holding the book open on her lap",
+            "lying on her stomach on a bed, book propped up, legs casually crossed in the air",
+            "leaning comfortably against a wall, book held at chest height with both hands",
+            "sitting relaxed on a bench, book resting naturally on her lap",
+            "standing gracefully by a window, book held up near her face as she looks down at it",
+            "curled up comfortably in a big armchair with the book in her hands",
+            "walking slowly outdoors, book held gently against her chest",
+            "sitting at a small table with a coffee cup nearby, reading the book with a soft smile",
+            "sitting on the edge of a bed, one leg tucked under, book in her hands",
+            "standing in a doorway, book held loosely by her side, looking at the camera with a gentle smile"
+        ];
+        const STYLES = [
+            "warm golden hour lighting, shallow depth of field, aesthetic film photography look with beautiful bokeh",
+            "soft natural window light, minimal muted tones, clean elegant composition, very photorealistic",
+            "moody cinematic lighting, slightly desaturated colors, dramatic but natural shadows",
+            "bright airy pastel tones, soft cottagecore aesthetic, dreamy and inviting",
+            "high-contrast editorial photography style, sharp details, professional bookstagram quality",
+            "soft diffused natural light, warm cozy tones, lifestyle photography feel"
+        ];
         function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
         window.onload = function() {
             setupDragDrop();
             updateKeyUI();
             setupChips();
         };
-
         function setupChips() {
             document.querySelectorAll('#style-chips .chip').forEach(chip => {
                 chip.addEventListener('click', () => {
@@ -318,7 +327,6 @@
                 });
             });
         }
-
         function toggleSettings() {
             const panel = document.getElementById('settings-panel');
             panel.classList.toggle('hidden');
@@ -327,7 +335,6 @@
                 document.getElementById('api-key-input').focus();
             }
         }
-
         function saveApiKey() {
             const input = document.getElementById('api-key-input').value.trim();
             if (!input || !input.startsWith('xai-')) {
@@ -340,19 +347,16 @@
             checkReady();
             setTimeout(() => document.getElementById('settings-panel').classList.add('hidden'), 1200);
         }
-
         function showKeyStatus(msg, cls) {
             const el = document.getElementById('key-status');
             el.className = 'text-xs mt-2 ' + cls;
             el.textContent = msg;
             el.classList.remove('hidden');
         }
-
         function updateKeyUI() {
             const warning = document.getElementById('no-key-warning');
             apiKey ? warning.classList.add('hidden') : warning.classList.remove('hidden');
         }
-
         function handleFile(input, num) {
             const file = input.files[0];
             if (!file) return;
@@ -368,11 +372,9 @@
             };
             reader.readAsDataURL(file);
         }
-
         function checkReady() {
             document.getElementById('gen-btn').disabled = !(file1Data && file2Data && apiKey);
         }
-
         function setupDragDrop() {
             ['drop1', 'drop2'].forEach((id, i) => {
                 const zone = document.getElementById(id);
@@ -389,39 +391,55 @@
                 });
             });
         }
-
         function buildPrompt() {
             const customPrompt = document.getElementById('prompt').value.trim();
             const activeChip = document.querySelector('#style-chips .chip.active');
             const sceneHint = activeChip ? activeChip.dataset.style : pick(PLACES);
             const pose = pick(POSES);
             const styleLook = pick(STYLES);
+            
+            return `You are creating a beautiful, photorealistic bookstagram-style photograph using two reference images. The goal is to make it look like a real professional photo taken by a bookstagrammer — natural, fresh, and never repetitive.
 
-            return `You are generating a realistic bookstagram-style photograph using two reference images.
+**REFERENCE IMAGE 1 (The Person - MUST KEEP IDENTICAL):**
+- Use this exact woman's face, identity, skin tone, eye color, hair color, hair length, and hairstyle with 100% accuracy.
+- Do NOT change her face, facial features, skin texture, or hair in any way. Her identity must stay completely recognizable.
 
-REFERENCE IMAGE 1 (Person): Use this exact person's face, identity, skin tone, and hair — do not alter their face or facial features in any way.
+**REFERENCE IMAGE 2 (The Book Cover - MUST KEEP IDENTICAL):**
+- The physical book she is holding must show the EXACT same front cover design as Reference Image 2.
+- Do not change, redraw, move, or alter any text, title, author name, artwork, colors, or layout on the book cover. It must be pixel-perfect to the reference.
 
-REFERENCE IMAGE 2 (Book Cover): Use this exact book cover design, exactly as shown — do not change any text, artwork, colors, or layout on the cover. Do not invent a new cover.
+**WHAT MUST CHANGE EVERY SINGLE TIME (this is very important):**
+- The woman's outfit and clothing must be COMPLETELY DIFFERENT from the reference photo and from previous generations.
+- Choose a stylish, photogenic, bookstagram-appropriate outfit that perfectly matches the scene vibe (cozy sweaters, flowy blouses, casual chic dresses, oversized cardigans, elegant tops, etc.).
+- The pose must feel natural and different every time.
+- The background, environment, and lighting must be fresh and unique.
+- The overall composition and camera angle should feel new.
 
-SCENE: Place the person from Reference Image 1 in ${sceneHint}, in this pose: ${pose}. The person is holding or near a physical book whose front cover shows exactly the design from Reference Image 2, wrapped realistically around a book with natural thickness, lighting and shadow consistent with the scene.
+**SCENE & POSE:**
+Place her in this location: ${sceneHint}.
+She is in this exact natural pose: ${pose}.
+She is holding or interacting with a real physical book. The front cover of this book must be exactly the design from Reference Image 2, with realistic book thickness, pages, shadows, and lighting that matches the scene.
 
-STYLE: ${styleLook}. Photorealistic, natural proportions, realistic hands holding the book, consistent lighting across the whole image.
+**PHOTOGRAPHY STYLE & QUALITY:**
+${styleLook}.
+Shot on a professional camera, highly photorealistic, natural skin texture with visible pores, realistic fabric texture and folds on clothing, natural hand positions, soft beautiful lighting, shallow depth of field, no plastic or artificial skin look. Make it look like a real high-quality Instagram bookstagram photo.
 
-${customPrompt ? 'ADDITIONAL INSTRUCTIONS: ' + customPrompt : ''}
+${customPrompt ? 'ADDITIONAL USER INSTRUCTIONS: ' + customPrompt : ''}
 
-STRICT RULES: Keep the person's face identical to Reference Image 1. Keep the book cover design identical to Reference Image 2 with zero text or artwork changes. Only the background, pose, and photographic style should be new each time.`;
+**STRICT RULES YOU MUST FOLLOW:**
+1. Face, hair, and identity from Reference Image 1 = 100% unchanged.
+2. Book cover from Reference Image 2 = 100% unchanged (no text or design modifications allowed).
+3. Outfit and clothing = MUST be new and different every single generation.
+4. The final image must look like a real photograph, not AI-generated. Avoid weird hands, distorted proportions, or overly smooth skin.
+5. Every generation should feel fresh, unique, and natural — as if she took a completely new photoshoot in a different outfit and location.`;
         }
-
         async function doGenerate() {
             if (!file1Data || !file2Data || !apiKey) return;
             showLoading(true);
             hideError();
-
             try {
                 const prompt = buildPrompt();
-
                 updateProgress(20, 'Preparing images...');
-
                 const payload = {
                     model: "grok-imagine-image",
                     prompt: prompt,
@@ -430,9 +448,7 @@ STRICT RULES: Keep the person's face identical to Reference Image 1. Keep the bo
                         { url: file2Data, type: "image_url" }
                     ]
                 };
-
                 updateProgress(40, 'Sending to xAI API...');
-
                 const response = await fetch('https://api.x.ai/v1/images/edits', {
                     method: 'POST',
                     headers: {
@@ -441,9 +457,7 @@ STRICT RULES: Keep the person's face identical to Reference Image 1. Keep the bo
                     },
                     body: JSON.stringify(payload)
                 });
-
                 updateProgress(80, 'Receiving result...');
-
                 const responseText = await response.text();
                 let data;
                 try {
@@ -451,20 +465,15 @@ STRICT RULES: Keep the person's face identical to Reference Image 1. Keep the bo
                 } catch (e) {
                     throw new Error('xAI API response (not JSON): ' + responseText.slice(0, 200));
                 }
-
                 if (!response.ok) {
                     throw new Error(data.error?.message || `API Error ${response.status}: ${JSON.stringify(data)}`);
                 }
-
                 const imageUrl = data.data?.[0]?.url || data.data?.[0]?.b64_json;
                 if (!imageUrl) throw new Error('xAI did not return an image. Response: ' + JSON.stringify(data));
-
                 updateProgress(100, 'Done!');
-
                 const resultSrc = imageUrl.startsWith('data:') || imageUrl.startsWith('http')
                     ? imageUrl
                     : 'data:image/png;base64,' + imageUrl;
-
                 if (document.getElementById('result-after').src) {
                     const prevSrc = document.getElementById('result-after').src;
                     if (prevSrc && prevSrc !== window.location.href) {
@@ -472,12 +481,10 @@ STRICT RULES: Keep the person's face identical to Reference Image 1. Keep the bo
                         renderHistory();
                     }
                 }
-
                 document.getElementById('result-after').src = resultSrc;
                 window.__lastResult = resultSrc;
                 document.getElementById('result-section').classList.remove('hidden');
                 document.getElementById('result-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
-
             } catch (err) {
                 console.error('Generate error:', err);
                 let hint = '';
@@ -496,7 +503,6 @@ STRICT RULES: Keep the person's face identical to Reference Image 1. Keep the bo
                 showLoading(false);
             }
         }
-
         function renderHistory() {
             const wrap = document.getElementById('history-wrap');
             const grid = document.getElementById('history-grid');
@@ -506,7 +512,6 @@ STRICT RULES: Keep the person's face identical to Reference Image 1. Keep the bo
                 `<img src="${src}" class="rounded-lg cursor-pointer border border-zinc-800" onclick="document.getElementById('result-after').src=this.src; window.__lastResult=this.src;">`
             ).join('');
         }
-
         function showLoading(on) {
             document.getElementById('loading-overlay').classList.toggle('active', on);
             document.getElementById('gen-btn').disabled = on;
@@ -515,22 +520,18 @@ STRICT RULES: Keep the person's face identical to Reference Image 1. Keep the bo
                 document.getElementById('loading-stage').textContent = 'Processing images...';
             }
         }
-
         function updateProgress(pct, stage) {
             document.getElementById('progress-bar').style.width = pct + '%';
             document.getElementById('loading-stage').textContent = stage;
         }
-
         function showError(msg, hint) {
             document.getElementById('error-box').classList.remove('hidden');
             document.getElementById('error-msg').textContent = msg;
             document.getElementById('error-hint').textContent = hint || '';
         }
-
         function hideError() {
             document.getElementById('error-box').classList.add('hidden');
         }
-
         function downloadResult() {
             if (!window.__lastResult) return;
             const a = document.createElement('a');
@@ -541,7 +542,6 @@ STRICT RULES: Keep the person's face identical to Reference Image 1. Keep the bo
             document.body.removeChild(a);
         }
     </script>
-
     <!-- Footer -->
     <footer class="border-t border-white/5 mt-8 py-6 text-center">
         <div class="flex items-center justify-center gap-2 text-zinc-500 text-sm">
